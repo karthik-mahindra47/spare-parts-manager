@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-6">Spare Parts Inventory Management</h1>
+        
+        <!-- File Upload and Add Part Button -->
+        <div class="flex flex-col md:flex-row gap-4 mb-6">
+            <div class="flex-1">
+                <input type="file" 
+                       id="fileUpload" 
+                       accept=".xlsx,.xls" 
+                       class="w-full p-2 border rounded">
+            </div>
+            <button onclick="showAddForm()" 
+                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Add New Part
+            </button>
+        </div>
+
+        <!-- Email Settings -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <input type="email" 
+                   id="email1" 
+                   placeholder="Alert Email 1" 
+                   class="p-2 border rounded">
+            <input type="email" 
+                   id="email2" 
+                   placeholder="Alert Email 2" 
+                   class="p-2 border rounded">
+            <input type="email" 
+                   id="email3" 
+                   placeholder="Alert Email 3" 
+                   class="p-2 border rounded">
+        </div>
+
+        <!-- Add/Edit Form (Hidden by default) -->
+        <div id="partForm" class="hidden bg-gray-50 p-4 rounded mb-6">
+            <h2 class="text-xl font-bold mb-4" id="formTitle">Add New Part</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <input type="text" id="srNo" placeholder="Sr No." class="p-2 border rounded">
+                <input type="text" id="equipment" placeholder="Equipment" class="p-2 border rounded">
+                <input type="text" id="itemDescription" placeholder="Item Description" class="p-2 border rounded">
+                <input type="text" id="oemPartNumber" placeholder="OEM Part Number" class="p-2 border rounded">
+                <input type="text" id="oem" placeholder="OEM" class="p-2 border rounded">
+                <input type="number" id="qty" placeholder="Quantity" class="p-2 border rounded">
+                <input type="text" id="igtPartNumber" placeholder="IGT Part Number" class="p-2 border rounded">
+                <input type="text" id="location" placeholder="Location" class="p-2 border rounded">
+                <input type="text" id="sublocation" placeholder="Sublocation" class="p-2 border rounded">
+            </div>
+            <div class="mt-4 flex gap-4">
+                <button onclick="savePart()" 
+                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    Save Part
+                </button>
+                <button onclick="hideForm()" 
+                        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+        <!-- Parts Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th class="p-3 border">Sr No.</th>
+                        <th class="p-3 border">Equipment</th>
+                        <th class="p-3 border">Item Description</th>
+                        <th class="p-3 border">OEM Part Number</th>
+                        <th class="p-3 border">OEM</th>
+                        <th class="p-3 border">QTY</th>
+                        <th class="p-3 border">IGT Part Number</th>
+                        <th class="p-3 border">Location</th>
+                        <th class="p-3 border">Sublocation</th>
+                        <th class="p-3 border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="partsTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
